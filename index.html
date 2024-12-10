@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="3D Mesh Editing using Masked LRMs">
+
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Masked LRM, Mesh Editing, Large Reconstruction Model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>3D Mesh Editing using Masked LRMs</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">3D Mesh Editing using Masked LRMs</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://www.computerscience.uchicago.edu/people/will-gao/" target="_blank">William
+                  Gao</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="https://wdilin.github.io/" target="_blank">Dilin Wang</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://ychfan.github.io/" target="_blank">Yuchen Fan</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://aljazbozic.github.io/" target="_blank">Aljaž Božič</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://tuurstuyck.github.io/" target="_blank">Tuur Stuyck</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://sites.google.com/view/zhengqinli" target="_blank">Zhengqin Li</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.flycooler.com/" target="_blank">Zhao Dong</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/rakesh-r-3848538/" target="_blank">Rakesh
+                  Ranjan</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://nsarafianos.github.io/" target="_blank">Nikolaos Sarafianos</a><sup>2</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>University of Chicago, <sup>2</sup>Meta Reality Labs</span>
+              <span class="eql-cntrb"><small><br><sup>*</sup>Research done during Meta Internship</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Supplementary PDF link -->
+                <span class="link-block">
+                  <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Supplementary</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Teaser video-->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video poster="" id="bird_teaser" autoplay controls muted loop height="100%">
+          <!-- Your video here -->
+          <source src="static/videos/bird_teaser.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          By training an LRM using multi-view 3D masking, we enable mesh editing using a single conditional view. Our
+          model takes
+          the edited image and propogates the edit into the entire masked region in 3D.
+        </h2>
+      </div>
+    </div>
+  </section>
+  <!-- End teaser video -->
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We present a novel approach to mesh shape editing, building on recent progress in 3D reconstruction from
+              multi-view images.
+              We formulate shape editing as a conditional reconstruction problem, where the model must reconstruct the
+              input shape with the exception
+              of a specified 3D region, in which the geometry should be generated from the conditional signal.
+              To this end, we train a conditional Large Reconstruction Model (LRM) for masked reconstruction, using
+              multi-view consistent masks rendered
+              from a randomly generated 3D occlusion, and using one clean viewpoint as the conditional signal.
+              During inference, we manually define a 3D region to edit and provide an edited image from a canonical
+              viewpoint to fill in that region.
+              We demonstrate that, in just a single forward pass, our method not only preserves the input geometry in
+              the unmasked region through
+              reconstruction capabilities on par with SoTA, but is also expressive enough to perform a variety of mesh
+              edits from a single image guidance
+              that past works struggle with, while being 10x faster than the top-performing competing prior work.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- End paper abstract -->
+
+      <!-- Overview. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <hr class="divider" />
+          <h2 class="title is-3">Training Overview</h2>
+          <div class="overview-image">
+            <img src="./static/images/new_overview.png" type="image/png">
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              Our model is a Large Reconstruction Model, taking posed images of an object as input and predicting
+              triplanes which may be decoded into an SDF and RGB colors as output.
+              In contrast to ordinary LRMs, we randomly generate rectangular 3D masks during training and render them
+              from the same camera poses as the input images. Patches that contain pixels occluded by these
+              masks are replaced with a learnable token. Through this masking procedure, our LRM learns how to "inpaint"
+              a 3D masked region in the input shape.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Overview. -->
+
+    </div>
+  </section>
+
+  <!-- Gallery video-->
+  <section class="hero gallery">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="columns is-centered has-text-centered">
+          <h2 class="title is-3">Result Gallery</h2>
+        </div>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/moustache.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/horns.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/shirt.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/chair_back.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/chair_legs.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/chair_hands.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/avocado.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/mermaid.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/tentacles.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/vase_handle.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/vase_hole.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/panda.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/donkey.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/crab.mp4" type="video/mp4">
+          </video>
+        </span>
+        <span class="seq-vid">
+          <video poster="" id="" width="300" height="300" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/alien.mp4" type="video/mp4">
+          </video>
+        </span>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        The initial mesh is shown in the top left, with a block masking out the editing region. The target image is
+        shown in the top right. Our model inpaints the masked region, resulting in the center mesh.
+      </h2>
+    </div>
+  </section>
+  <!-- End teaser video -->
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>BibTex Code Here</code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the
+              footer. <br> This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
